@@ -2,7 +2,8 @@ Source: gpib
 Section: science
 Priority: optional
 Maintainer: Gudjon I. Gudjonsson <gudjon@gudjon.org>
-Build-Depends: debhelper (>= 11), 
+Build-Depends: debhelper (>= 11),
+	       dkms,
                dh-python,
                autotools-dev, 
                automake, 
@@ -87,12 +88,10 @@ Description:  Documentation for the linux-gpib library
  This package contains the documentation and examples for the
  linux-gpib library.
 
-Package: gpib-modules-source
+Package: gpib-modules-dkms
 Architecture: all
-Depends:  ${misc:Depends}, bzip2
-Recommends: module-assistant
-Suggests: kernel-package
-Description: kernel modules for various GPIB boards
+Depends:  ${misc:Depends}
+Description: kernel modules for various GPIB boards (compiled through DKMS)
  ${Common:Description}
  This package contains the source for the kernel modules for various
- GPIB boards.
+ GPIB boards, to be compiled via DKMS.
