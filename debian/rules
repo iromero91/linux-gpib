@@ -30,6 +30,7 @@ config.status:
 		--prefix=/usr \
 		--mandir=\$${prefix}/share/man \
 		--infodir=\$${prefix}/share/info \
+		--sysconfdir=/etc \
 		--enable-pcmcia \
 		--enable-static \
 		--with-tcl=/usr/lib/tcl8.6/)
@@ -76,12 +77,8 @@ install: build
 	dh_prep 
 	dh_installdirs
 
-	# Add here commands to install the package into debian/tmp
-	cd build/include && $(MAKE) DESTDIR=$(CURDIR)/debian/tmp install
-	cd build/lib && $(MAKE) DESTDIR=$(CURDIR)/debian/tmp install
-	cd build/language && $(MAKE) DESTDIR=$(CURDIR)/debian/tmp install
-	cd build/examples && $(MAKE) DESTDIR=$(CURDIR)/debian/tmp install
-	cd build/doc && $(MAKE) DESTDIR=$(CURDIR)/debian/tmp install
+	# Use make install to get everything on the fakeroot
+	cd build && $(MAKE) DESTDIR=$(CURDIR)/debian/tmp install
 
 	#Documentation for C
 	mkdir -p debian/tmp/usr/share/linux-gpib/examples-c
@@ -114,21 +111,13 @@ install: build
 	mkdir -p debian/tmp/usr/share/man/man8
 	cp build/doc/gpib_config.8 debian/tmp/usr/share/man/man8
 
+	# fix E:udev-rule-in-etc
+	mkdir -p debian/tmp/lib
+	mv debian/tmp/etc/udev debian/tmp/lib/
+
 	#make modules source
 	dh_dkms -V $(DEB_VERSION_UPSTREAM)
 	cp -a kernel/* debian/gpib-modules-dkms/usr/src/linux-gpib-$(DEB_VERSION_UPSTREAM)/
-
-	#Only /etc/pcmcia is in build/etc, I think that should be removed too ???
-	cp -a build/etc debian/tmp
-	# etc directory made by the author
-	cp -a debian/etc debian/tmp
-	mkdir -p debian/tmp/etc/udev
-	#Install /etc/gpib.conf
-	cp build/util/templates/gpib.conf debian/tmp/etc
-	#Install gpib.agent (free) and non-free firmware, must be changed before upload ???
-	cp -a debian/lib debian/tmp
-	#Install the other include file needed (Mention to Frank that it lacks ???)
-	#cp build/include/gpib_user.h debian/tmp/usr/include/gpib
 
 binary-arch: build install
 	dh_testdir

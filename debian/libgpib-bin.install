@@ -1,5 +1,6 @@
 usr/bin/*
 usr/sbin/*
 etc/gpib.conf
-etc/udev/gpib.rules
+lib/udev/*
+usr/lib/udev/*
 usr/share/man/*
