@@ -40,7 +40,8 @@ Description: C bindings for GPIB (IEEE 488) kernel driver
 Package: libgpib-bin
 Architecture: any
 Depends: ${shlibs:Depends}, 
-         ${misc:Depends}
+         ${misc:Depends},
+	 fxload
 Description: Support and configuration applications for the GPIB library
  ${Common:Description}
  This package contains configuration files and binaries for libgpib
