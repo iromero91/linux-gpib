@@ -1,4 +1,4 @@
-Source: gpib
+Source: linux-gpib
 Section: science
 Priority: optional
 Maintainer: Gudjon I. Gudjonsson <gudjon@gudjon.org>

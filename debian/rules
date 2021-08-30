@@ -31,8 +31,6 @@ config.status:
 		--mandir=\$${prefix}/share/man \
 		--infodir=\$${prefix}/share/info \
 		--sysconfdir=/etc \
-		--enable-pcmcia \
-		--enable-static \
 		--with-tcl=/usr/lib/tcl8.6/)
 	touch $@
 
@@ -154,8 +152,8 @@ get-orig-source:
 	cd linux-gpib-$$VER && tar xzf linux-gpib-kernel-$$VER.tar.gz;cd ..;\
 	rm -f linux-gpib-$$VER/linux-gpib-kernel-$$VER.tar.gz;\
 	mv linux-gpib-$$VER/linux-gpib-kernel-$$VER linux-gpib-$$VER/linux-gpib-kernel;\
-	mv linux-gpib-$$VER gpib-$$VER;\
-	tar czf gpib_$$VER.orig.tar.gz gpib-$$VER;\
+	tar czf ../linux-gpib_$$VER.orig.tar.gz linux-gpib-$$VER;\
+	rm -rf linux-gpib-$$VER
 
 
 binary: binary-indep binary-arch

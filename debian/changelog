@@ -1,8 +1,13 @@
-gpib (4.3.4-1) UNRELEASED; urgency=medium
+linux-gpib (4.3.4-1.1) UNRELEASED; urgency=medium
+  [ Gudjon I. Gudjonsson ]
   * New upstream release
   * Bump compat to 10
 
- -- Gudjon I. Gudjonsson <gudjon@gudjon.org>  Sat, 20 Mar 2021 21:00:00 +0100
+  [ Jose Romero ]
+  * Use DKMS
+  * Rename package
+
+ -- Jose Romero <jose.cyborg@gmail.com>  Mon, 30 Aug 2021 02:15:52 -0500
 
 gpib (4.3.0-1) UNRELEASED; urgency=medium
 
